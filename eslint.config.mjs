@@ -1,6 +1,7 @@
 import globals from "globals";
 import js from "@eslint/js";
 import stylisticJs from "@stylistic/eslint-plugin-js";
+import eslintConfigPrettier from "eslint-config-prettier";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -14,7 +15,6 @@ export default [
       },
       ecmaVersion: "latest",
     },
-    ignores: ["dist/**"],
     plugins: {
       "@stylistic/js": stylisticJs,
     },
@@ -24,10 +24,12 @@ export default [
       "@stylistic/js/quotes": ["error", "single"],
       "@stylistic/js/semi": ["error", "never"],
       eqeqeq: "error",
-      "no-trailing-space": "error",
+      "no-trailing-spaces": "error",
       "object-curly-spacing": ["error", "always"],
       "arrow-spacing": ["error", { before: true, after: true }],
       "no-console": "off",
     },
+    ignores: ["dist/**", "build/**"],
   },
+  eslintConfigPrettier,
 ];
