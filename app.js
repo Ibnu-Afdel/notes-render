@@ -1,6 +1,6 @@
 const config = require("./utils/config");
 const express = require("express");
-const app = require("./app");
+const app = express();
 const cors = require("cors");
 const noteRouter = require("./controllers/notes");
 const middleware = require("./utils/middleware");
@@ -11,7 +11,7 @@ mongoose.set("strictQuery", false);
 logger.info("connecting to ", config.MONGODO_URI);
 
 mongoose
-  .connect(config.MONGODO_URI)
+  .connect(config.MONGODB_URI)
   .then(() => {
     logger.info("connected to mongoDB");
   })
