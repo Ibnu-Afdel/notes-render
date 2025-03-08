@@ -26,7 +26,7 @@ beforeEach(async () => {
   await noteObject.save();
 });
 
-test.only("a valid note can be added", async () => {
+test("a valid note can be added", async () => {
   const newNote = {
     content: "async/awiat simplifies making async calls",
     important: true,
@@ -42,6 +42,17 @@ test.only("a valid note can be added", async () => {
   const contents = response.body.map((r) => r.content);
   assert.strictEqual(response.body.length, initialNotes.length + 1);
   assert(contents.includes("async/awiat simplifies making async calls"));
+});
+
+test.only("note without content is not added", async () => {
+  const newNote = {
+    important: true,
+  };
+  await api.post("/api/notes").send(newNote).expect(400);
+
+  const response = await api.get("/api/notes");
+
+  assert.strictEqual(response.body.length, initialNotes.length);
 });
 
 test("notes are returned as json", async () => {
